@@ -12,5 +12,20 @@
   <modules>
     <module>spring-javaconfig</module>
     <module>dsp-spring-jndi</module>
+    <module>dsp-spring-jndi-lookup</module>
   </modules>
+
+<!--
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-dependencies</artifactId>
+    <version>1.2.2.RELEASE</version>
+  </parent>
+-->
+<!--
+  <properties>
+    <tomcat.version>8.0.20</tomcat.version>
+  </properties>
+-->
+
 </project>
