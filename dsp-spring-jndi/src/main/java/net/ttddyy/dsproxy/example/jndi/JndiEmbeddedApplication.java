@@ -5,6 +5,8 @@ import net.ttddyy.dsproxy.QueryCountHolder;
 import net.ttddyy.dsproxy.listener.CommonsLogLevel;
 import net.ttddyy.dsproxy.support.CommonsQueryCountLoggingFilter;
 import net.ttddyy.dsproxy.support.ProxyDataSource;
+import net.ttddyy.dsproxy.support.QueryCountLoggerBuilder;
+import net.ttddyy.dsproxy.support.SystemOutQueryCountLoggingFilter;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.tomcat.util.descriptor.web.ContextResource;
@@ -25,9 +27,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.util.Arrays;
 
 /**
+ * Use embedded tomcat and register datasource as JNDI resources.
+ *
  * @author Tadaya Tsuyukubo
  */
 @SpringBootApplication
@@ -92,7 +97,7 @@ public class JndiEmbeddedApplication {
     }
 
     @Bean
-    public DataSource jndiObjectFactoryBean() throws NamingException {
+    public DataSource dataSource() throws NamingException {
         // look up JNDI for this application
         JndiObjectFactoryBean factory = new JndiObjectFactoryBean();
         factory.setJndiName("java:comp/env/my/proxy");  // lookup ProxyDataSource
@@ -114,7 +119,8 @@ public class JndiEmbeddedApplication {
 
     @Bean
     public CommonsQueryCountLoggingFilter commonsQueryCountLoggingFilter() {
-        return new CommonsQueryCountLoggingFilter(CommonsLogLevel.INFO);  // servlet filter
+        // servlet-filter bean
+        return QueryCountLoggerBuilder.create().buildCommonsFilter(CommonsLogLevel.INFO);
     }
 
     @Autowired

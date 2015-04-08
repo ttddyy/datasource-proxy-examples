@@ -7,6 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,9 +45,12 @@ public class JndiLookupApplication extends SpringBootServletInitializer {
     private JdbcTemplate jdbcTemplate;
 
     @RequestMapping
-    public String index() throws Exception {
+    public ModelMap index() throws Exception {
         int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM users", Integer.class);
-        return "ABC" + count;
+
+        ModelMap result = new ModelMap();
+        result.put("count", count);
+        return result;
     }
 
 

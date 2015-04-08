@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.util.Arrays;
 
 /**
+ * Spring java based configuration using {@link net.ttddyy.dsproxy.support.ProxyDataSourceBuilder}.
+ *
  * @author Tadaya Tsuyukubo
  */
 @SpringBootApplication
@@ -24,34 +26,33 @@ public class Application {
 
     @Bean
     public DataSource actualDataSource() {
-        DataSourceBuilder factory = DataSourceBuilder
+        return DataSourceBuilder
                 .create(Application.class.getClassLoader())
                 .driverClassName("org.hsqldb.jdbcDriver")
-                .url("jdbc:hsqldb:mem:testdb")
+                .url("jdbc:hsqldb:mem:testdb")  // in-memory db
                 .username("sa")
-                .password("");
-        return factory.build();
+                .password("")
+                .build();
     }
 
     @Bean
     public DataSource dataSource(DataSource actualDataSource) {
-//        ProxyDataSource dataSource = new ProxyDataSource();
-//        dataSource.setDataSource(originalDataSource);
-//        dataSource.setListener(new SystemOutQueryLoggingListener());
-//        return dataSource;
-
         return ProxyDataSourceBuilder
                 .create(actualDataSource)
+                .name("MyDS")
                 .logQueryToSysOut()
                 .build();
     }
 
     @Bean
-    CommandLineRunner init(JdbcTemplate jdbcTemplate) {
+    CommandLineRunner init(JdbcTemplate jdbcTemplate) {    // DataSourceAutoConfiguration creates jdbcTemplate
         return args -> {
+
+            System.out.println("**********************************************************");
+
             jdbcTemplate.execute("CREATE TABLE users (id INT, name VARCHAR(20))");
 
-//            jdbcTemplate.batchUpdate("INSERT INTO users (id, name) VALUES (?, ?)", Arrays.asList(new Object[][]{{1, "foo"}, {2, "bar"}}));
+            jdbcTemplate.batchUpdate("INSERT INTO users (id, name) VALUES (?, ?)", Arrays.asList(new Object[][]{{1, "foo"}, {2, "bar"}}));
 
             PreparedStatement preparedStatement = jdbcTemplate.getDataSource().getConnection().prepareStatement("INSERT INTO users (id, name) VALUES (?, ?)");
             preparedStatement.setString(2, "FOO");
@@ -62,6 +63,8 @@ public class Application {
             preparedStatement.addBatch();
             preparedStatement.executeBatch();
 
+            jdbcTemplate.queryForObject("SELECT COUNT(*) FROM users", Integer.class);
+            System.out.println("**********************************************************");
 
         };
     }
