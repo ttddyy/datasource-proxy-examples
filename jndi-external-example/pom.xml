@@ -15,7 +15,7 @@
     <relativePath/>
   </parent>
 
-  <name>dsp-spring-jndi-lookup</name>
+  <name>jndi-external-example</name>
   <description>datasource-proxy example project: JNDI lookup with external tomcat</description>
 
   <properties>
