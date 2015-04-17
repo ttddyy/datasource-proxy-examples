@@ -2,7 +2,7 @@
 
 This example project demonstrates:
 - JNDI datasource lookup using embedded tomcat
-- Servlet filter for QueryCount(`CommonsQueryCountLoggingFilter`)
+- Servlet filter for QueryCount(`CommonsQueryCountLoggingServletFilter`)
 
 ---
 
@@ -26,7 +26,7 @@ Accessing application:
 Log:
 ```
 .. CommonsQueryLoggingListener    : Name:MyProxy, Time:6, Success:True, Type:Statement, Batch:False, QuerySize:1, BatchSize:0, Query:["SELECT COUNT(*) FROM users"], Params:[]
-.. CommonsQueryCountLoggingFilter : Name:"MyProxy", Time:6, Total:1, Success:1, Failure:0, Select:1, Insert:0, Update:0, Delete:0, Other:0
+.. CommonsQueryCountLoggingServletFilter : Name:"MyProxy", Time:6, Total:1, Success:1, Failure:0, Select:1, Insert:0, Update:0, Delete:0, Other:0
 ```
 
 

@@ -3,10 +3,10 @@ package net.ttddyy.dsproxy.example.jndi;
 import net.ttddyy.dsproxy.QueryCount;
 import net.ttddyy.dsproxy.QueryCountHolder;
 import net.ttddyy.dsproxy.listener.CommonsLogLevel;
-import net.ttddyy.dsproxy.support.CommonsQueryCountLoggingFilter;
+import net.ttddyy.dsproxy.support.CommonsQueryCountLoggingServletFilter;
 import net.ttddyy.dsproxy.support.ProxyDataSource;
 import net.ttddyy.dsproxy.support.QueryCountLoggerBuilder;
-import net.ttddyy.dsproxy.support.SystemOutQueryCountLoggingFilter;
+import net.ttddyy.dsproxy.support.SystemOutQueryCountLoggingServletFilter;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.tomcat.util.descriptor.web.ContextResource;
@@ -118,7 +118,7 @@ public class JndiEmbeddedApplication {
     }
 
     @Bean
-    public CommonsQueryCountLoggingFilter commonsQueryCountLoggingFilter() {
+    public CommonsQueryCountLoggingServletFilter commonsQueryCountLoggingServletFilter() {
         // servlet-filter bean
         return QueryCountLoggerBuilder.create().buildCommonsFilter(CommonsLogLevel.INFO);
     }
