@@ -21,6 +21,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
+    <start-class>net.ttddyy.dsproxy.example.jndi.lookup.JndiLookupApplication</start-class>
   </properties>
 
   <build>

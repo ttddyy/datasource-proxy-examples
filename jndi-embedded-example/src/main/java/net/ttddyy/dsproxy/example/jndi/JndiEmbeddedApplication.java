@@ -2,11 +2,10 @@ package net.ttddyy.dsproxy.example.jndi;
 
 import net.ttddyy.dsproxy.QueryCount;
 import net.ttddyy.dsproxy.QueryCountHolder;
-import net.ttddyy.dsproxy.listener.CommonsLogLevel;
+import net.ttddyy.dsproxy.listener.logging.CommonsLogLevel;
 import net.ttddyy.dsproxy.support.CommonsQueryCountLoggingServletFilter;
 import net.ttddyy.dsproxy.support.ProxyDataSource;
 import net.ttddyy.dsproxy.support.QueryCountLoggerBuilder;
-import net.ttddyy.dsproxy.support.SystemOutQueryCountLoggingServletFilter;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.tomcat.util.descriptor.web.ContextResource;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.util.Arrays;
 
 /**
