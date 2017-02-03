@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -36,6 +37,7 @@ public class Application {
     }
 
     @Bean
+    @Primary
     public DataSource dataSource(DataSource actualDataSource) {
         return ProxyDataSourceBuilder
                 .create(actualDataSource)
