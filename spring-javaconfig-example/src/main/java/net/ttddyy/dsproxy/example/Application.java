@@ -4,10 +4,11 @@ import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -27,13 +28,8 @@ public class Application {
 
     @Bean
     public DataSource actualDataSource() {
-        return DataSourceBuilder
-                .create(Application.class.getClassLoader())
-                .driverClassName("org.hsqldb.jdbcDriver")
-                .url("jdbc:hsqldb:mem:testdb")  // in-memory db
-                .username("sa")
-                .password("")
-                .build();
+        EmbeddedDatabaseBuilder databaseBuilder = new EmbeddedDatabaseBuilder();
+        return databaseBuilder.setType(EmbeddedDatabaseType.HSQL).build();
     }
 
     @Bean
