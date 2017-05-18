@@ -9,3 +9,5 @@
 **spring-javaconfig-example**
 - programmatic `ProxyDataSource` creation
 
+**Hibernate-javaconfig-example**
+- programmatic `ProxyDataSource` creation
