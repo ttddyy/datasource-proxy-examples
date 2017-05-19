@@ -17,6 +17,7 @@
     <module>spring-javaconfig-example</module>
     <module>jndi-embedded-example</module>
     <module>jndi-external-example</module>
+    <module>hibernate-example</module>
   </modules>
 
   <dependencies>
