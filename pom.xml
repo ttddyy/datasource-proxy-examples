@@ -18,6 +18,7 @@
     <module>jndi-embedded-example</module>
     <module>jndi-external-example</module>
     <module>hibernate-example</module>
+    <module>springboot-autoconfig-example</module>
   </modules>
 
   <dependencies>
