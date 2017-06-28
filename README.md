@@ -11,3 +11,6 @@
 
 **Hibernate-example**
 - programmatic `ProxyDataSource` creation
+
+**springboot-autoconfig-example**
+- programmatic `ProxyDataSource` creation
