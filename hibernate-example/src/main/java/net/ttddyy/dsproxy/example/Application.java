@@ -1,9 +1,15 @@
 package net.ttddyy.dsproxy.example;
 
-import net.ttddyy.dsproxy.listener.logging.DefaultQueryLogEntryCreator;
-import net.ttddyy.dsproxy.listener.logging.SystemOutQueryLoggingListener;
-import net.ttddyy.dsproxy.support.ProxyDataSource;
-import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.sql.DataSource;
+
 import org.h2.jdbcx.JdbcDataSource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,21 +21,15 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.engine.jdbc.internal.FormatStyle;
 import org.hibernate.engine.jdbc.internal.Formatter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.sql.DataSource;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import net.ttddyy.dsproxy.listener.logging.DefaultQueryLogEntryCreator;
+import net.ttddyy.dsproxy.listener.logging.SystemOutQueryLoggingListener;
+import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 
 public class Application {
 
     public static void main(String[] args) {
-        try {
+        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             // Insert into table
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.getTransaction().begin();
             Usertable fooUser = new Usertable();
             fooUser.setId(1);
@@ -47,7 +47,6 @@ public class Application {
         } finally {
             HibernateUtil.closeSessionFactory();
         }
-
     }
 
     // use hibernate to format queries
@@ -58,33 +57,6 @@ public class Application {
         protected String formatQuery(String query) {
             return this.formatter.format(query);
         }
-    }
-
-    private static DataSource getDataSource() {
-        // use pretty formatted query with multiline enabled
-        PrettyQueryEntryCreator creator = new PrettyQueryEntryCreator();
-        creator.setMultiline(true);
-        SystemOutQueryLoggingListener listener = new SystemOutQueryLoggingListener();
-        listener.setQueryLogEntryCreator(creator);
-
-        // Create ProxyDataSource
-        ProxyDataSource dataSource = ProxyDataSourceBuilder.create(getH2DataSource())
-                .name("ProxyDataSource")
-                .countQuery()
-                .multiline()
-                .listener(listener)
-                .logSlowQueryToSysOut(1, TimeUnit.MINUTES)
-                .build();
-
-        return dataSource;
-    }
-
-    private static DataSource getH2DataSource() {
-        JdbcDataSource ds = new JdbcDataSource();
-        ds.setURL("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
-        ds.setUser("sa");
-        ds.setPassword("");
-        return ds;
     }
 
     @Entity
@@ -107,7 +79,11 @@ public class Application {
 
     private static class HibernateUtil {
         private static SessionFactory sessionFactory;
-
+        
+        private HibernateUtil() throws IllegalAccessException {
+            throw new IllegalAccessException("This is utility method, cannot create object");
+        }
+        
         public static synchronized SessionFactory getSessionFactory() {
             if (sessionFactory == null) {
                 sessionFactory = buildSessionFactory();
@@ -152,5 +128,31 @@ public class Application {
                 throw new ExceptionInInitializerError(ex.getCause());
             }
         }
+        
+        private static DataSource getDataSource() {
+            // use pretty formatted query with multiline enabled
+            PrettyQueryEntryCreator creator = new PrettyQueryEntryCreator();
+            creator.setMultiline(true);
+            SystemOutQueryLoggingListener listener = new SystemOutQueryLoggingListener();
+            listener.setQueryLogEntryCreator(creator);
+
+            // Create ProxyDataSource
+            return ProxyDataSourceBuilder.create(getH2DataSource())
+                    .name("ProxyDataSource")
+                    .countQuery()
+                    .multiline()
+                    .listener(listener)
+                    .logSlowQueryToSysOut(1, TimeUnit.MINUTES)
+                    .build();
+        }
+
+        private static DataSource getH2DataSource() {
+            JdbcDataSource ds = new JdbcDataSource();
+            ds.setURL("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
+            ds.setUser("sa");
+            ds.setPassword("");
+            return ds;
+        }
     }
+
 }
