@@ -15,6 +15,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
+import java.lang.reflect.Method;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Arrays;
 
@@ -60,12 +62,22 @@ public class Application {
                 .create(actualDataSource)
                 .name("MyDS")
                 .listener(listener)
+                .proxyResultSet()  // enable resultset proxy
+                .afterMethod(executionContext -> {
+                    // print out JDBC API calls to console
+                    Method method = executionContext.getMethod();
+                    Class<?> targetClass = executionContext.getTarget().getClass();
+                    System.out.println("JDBC: " + targetClass.getSimpleName() + "#" + method.getName());
+                })
+                .afterQuery((execInfo, queryInfoList) -> {
+                    System.out.println("Query took " + execInfo.getElapsedTime() + "msec");
+                })
                 .build();
     }
 
     @Bean
     CommandLineRunner init(
-            JdbcTemplate jdbcTemplate) {    // DataSourceAutoConfiguration creates jdbcTemplate
+            JdbcTemplate jdbcTemplate, DataSource ds) {    // DataSourceAutoConfiguration creates jdbcTemplate
         return args -> {
 
             System.out.println("**********************************************************");
