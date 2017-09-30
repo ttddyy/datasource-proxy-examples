@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="proxyConfig"
+        factory-bean="proxyConfigSupport"
+        factory-method="create"/>
+
+  <bean id="proxyConfigSupport" class="net.ttddyy.dsproxy.support.ProxyConfigSpringXmlSupport">
+    <property name="dataSourceName" value="my-ds"/>
+    <property name="queryListener" ref="queryListener"/>
+    <property name="methodListener" ref="methodListener"/>
+  </bean>
+
+  <bean id="queryListener" class="net.ttddyy.dsproxy.listener.ChainListener">
+    <property name="listeners">
+      <list>
+        <bean class="net.ttddyy.dsproxy.listener.logging.SystemOutQueryLoggingListener"/>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="methodListener" class="net.ttddyy.dsproxy.listener.CompositeMethodListener">
+    <property name="listeners">
+      <list>
+        <bean class="net.ttddyy.dsproxy.listener.TracingMethodListener"/>
+      </list>
+    </property>
+  </bean>
+
+
+  <bean id="dataSource" primary="true" class="net.ttddyy.dsproxy.support.ProxyDataSource">
+    <description></description>
+    <property name="dataSource" ref="actualDataSource"/>
+    <property name="proxyConfig" ref="proxyConfig"/>
+    <!--
+      Alternatively, you can use SpEL to invoke create() method to get ProxyConfig bean.
+
+      <property name="proxyConfig" value="#{proxyConfigSupport.create()}"/>
+      -->
+  </bean>
+
+  <bean id="actualDataSource" factory-bean="embeddedDatabaseBuilder" factory-method="build"/>
+
+  <bean id="embeddedDatabaseBuilder"
+        class="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder">
+    <property name="type" value="HSQL"/>
+  </bean>
+
+</beans>
