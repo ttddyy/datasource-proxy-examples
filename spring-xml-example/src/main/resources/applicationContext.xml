@@ -33,7 +33,6 @@
 
 
   <bean id="dataSource" primary="true" class="net.ttddyy.dsproxy.support.ProxyDataSource">
-    <description></description>
     <property name="dataSource" ref="actualDataSource"/>
     <property name="proxyConfig" ref="proxyConfig"/>
     <!--
