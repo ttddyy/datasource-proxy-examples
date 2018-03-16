@@ -12,8 +12,8 @@
 [**spring-xml-example**](spring-xml-example/README.md)
 - programmatic `ProxyDataSource` creation
 
-[**Hibernate-example**](hibernate-example)
+[**Hibernate-example**](dsp-hibernate-example)
 - programmatic `ProxyDataSource` creation
 
-[**springboot-autoconfig-example**](springboot-autoconfig-example/README.md)
+[**springboot-autoconfig-example**](dsp-springboot-autoconfig-example/README.md)
 - programmatic `ProxyDataSource` creation
