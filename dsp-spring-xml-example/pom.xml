@@ -5,11 +5,11 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>spring-javaconfig-example</artifactId>
+  <artifactId>dsp-spring-xml-example</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>spring-javaconfig-example</name>
-  <description>datasource-proxy example project: java-based spring configuration</description>
+  <name>spring-xml-example</name>
+  <description>datasource-proxy example project: xml-based spring configuration</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -45,11 +45,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
     </dependency>
 
     <dependency>

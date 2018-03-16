@@ -6,10 +6,10 @@
 [**jndi-external-example**](jndi-external-example/README.md)
 - JNDI lookup with *external* tomcat
 
-[**spring-javaconfig-example**](spring-javaconfig-example/README.md)
+[**spring-javaconfig-example**](dsp-spring-javaconfig-example/README.md)
 - programmatic `ProxyDataSource` creation
 
-[**spring-xml-example**](spring-xml-example/README.md)
+[**spring-xml-example**](dsp-spring-xml-example/README.md)
 - programmatic `ProxyDataSource` creation
 
 [**Hibernate-example**](dsp-hibernate-example)
