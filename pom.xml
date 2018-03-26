@@ -14,12 +14,12 @@
 
   <!-- placeholder pom -->
   <modules>
-    <module>dsp-spring-javaconfig-example</module>
-    <module>dsp-spring-xml-example</module>
+    <module>spring-javaconfig-example</module>
+    <module>spring-xml-example</module>
     <module>jndi-embedded-example</module>
     <module>jndi-external-example</module>
-    <module>dsp-springboot-autoconfig-example</module>
-    <module>dsp-hibernate-example</module>
+    <module>springboot-autoconfig-example</module>
+    <module>hibernate-example</module>
   </modules>
 
   <dependencies>
