@@ -29,7 +29,7 @@ public class ApplicationTest {
        userList.add(user);
        userList.add(user1);
        
-       userRepository.save(userList);
+       userRepository.saveAll(userList);
        
        long count = userRepository.count();
        
