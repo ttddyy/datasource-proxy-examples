@@ -1,6 +1,7 @@
 package net.ttddyy.dsproxy.example;
 
 import net.ttddyy.dsproxy.listener.logging.SLF4JLogLevel;
+import net.ttddyy.dsproxy.support.ProxyDataSource;
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -17,7 +18,7 @@ public class DatasourceProxyBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) {
-        if (bean instanceof DataSource) {
+        if (bean instanceof DataSource && !(bean instanceof ProxyDataSource)) {
             // Instead of directly returning a less specific datasource bean
             // (e.g.: HikariDataSource -> DataSource), return a proxy object.
             // See following links for why:
@@ -41,7 +42,6 @@ public class DatasourceProxyBeanPostProcessor implements BeanPostProcessor {
         private final DataSource dataSource;
 
         public ProxyDataSourceInterceptor(final DataSource dataSource) {
-            super();
             this.dataSource = ProxyDataSourceBuilder.create(dataSource)
                     .name("MyDS")
                     .multiline()
