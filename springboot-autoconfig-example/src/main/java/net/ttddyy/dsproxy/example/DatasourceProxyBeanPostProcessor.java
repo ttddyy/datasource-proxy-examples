@@ -24,7 +24,7 @@ public class DatasourceProxyBeanPostProcessor implements BeanPostProcessor {
             // See following links for why:
             //   https://stackoverflow.com/questions/44237787/how-to-use-user-defined-database-proxy-in-datajpatest
             //   https://gitter.im/spring-projects/spring-boot?at=5983602d2723db8d5e70a904
-            //   http://blog.arnoldgalovics.com/2017/06/26/configuring-a-datasource-proxy-in-spring-boot/
+            //   https://arnoldgalovics.com/configuring-a-datasource-proxy-in-spring-boot/
             final ProxyFactory factory = new ProxyFactory(bean);
             factory.setProxyTargetClass(true);
             factory.addAdvice(new ProxyDataSourceInterceptor((DataSource) bean));
