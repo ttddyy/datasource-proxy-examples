@@ -14,7 +14,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
-    <hibernate.version>5.2.16.Final</hibernate.version>
+    <hibernate.version>5.4.24.Final</hibernate.version>
     <datasource-proxy.version>1.4.7</datasource-proxy.version>
   </properties>
 
