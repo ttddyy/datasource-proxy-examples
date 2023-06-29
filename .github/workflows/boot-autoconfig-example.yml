@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "springboot-autoconfig-example/**"
-    branches: [main]
+    branches: [master]
   pull_request:
     paths:
       - "springboot-autoconfig-example/**"
