@@ -1,5 +1,7 @@
 # datasource-proxy example projects
 
+Requires Java 17 to compile.
+
 [**jndi-embedded-example**](jndi-embedded-example/README.md)
 - JNDI lookup with *embedded* tomcat
 
