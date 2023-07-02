@@ -18,7 +18,7 @@ public class DatasourceProxyBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) {
-        if (bean instanceof DataSource && !(bean instanceof ProxyDataSource)) {
+        if (bean instanceof DataSource source && !(bean instanceof ProxyDataSource)) {
             // Instead of directly returning a less specific datasource bean
             // (e.g.: HikariDataSource -> DataSource), return a proxy object.
             // See following links for why:
@@ -27,7 +27,7 @@ public class DatasourceProxyBeanPostProcessor implements BeanPostProcessor {
             //   https://arnoldgalovics.com/configuring-a-datasource-proxy-in-spring-boot/
             final ProxyFactory factory = new ProxyFactory(bean);
             factory.setProxyTargetClass(true);
-            factory.addAdvice(new ProxyDataSourceInterceptor((DataSource) bean));
+            factory.addAdvice(new ProxyDataSourceInterceptor(source));
             return factory.getProxy();
         }
         return bean;
