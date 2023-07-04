@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.sql.DataSource;
+import javax.sql.DataSource;
 
 import org.h2.jdbcx.JdbcDataSource;
 import org.hibernate.Session;
@@ -34,15 +34,15 @@ public class Application {
             Usertable fooUser = new Usertable();
             fooUser.setId(1);
             fooUser.setName("foo");
-            session.save(fooUser);
+            session.persist(fooUser);
             Usertable barUser = new Usertable();
             barUser.setId(2);
             barUser.setName("bar");
-            session.save(barUser);
+            session.persist(barUser);
             Usertable tarUser = new Usertable();
             tarUser.setId(3);
             tarUser.setName("tar");
-            session.save(tarUser);
+            session.persist(tarUser);
             session.getTransaction().commit();
         } finally {
             HibernateUtil.closeSessionFactory();
