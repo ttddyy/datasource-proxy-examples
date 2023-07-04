@@ -12,7 +12,7 @@
 Name:ProxyDataSource, Connection:2, Time:1, Success:True
 Type:Statement, Batch:False, QuerySize:1, BatchSize:0
 Query:["
-    drop table if exists "Application$Usertable" cascade "]
+    drop table Application$Usertable if exists"]
 Params:[]
 
 Name:ProxyDataSource, Connection:3, Time:5, Success:True
@@ -35,6 +35,6 @@ Params:[(foo,1),(bar,2),(tar,3)]
 Name:ProxyDataSource, Connection:5, Time:1, Success:True
 Type:Statement, Batch:False, QuerySize:1, BatchSize:0
 Query:["
-    drop table if exists "Application$Usertable" cascade "]
+    drop table Application$Usertable if exists "]
 Params:[]
 ```
