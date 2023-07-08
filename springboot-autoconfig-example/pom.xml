@@ -5,8 +5,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <modelVersion>4.0.0</modelVersion>
+  <groupId>net.ttddyy</groupId>
   <artifactId>dsp-springboot-autoconfig-example</artifactId>
-
+  <version>1.0-SNAPSHOT</version>
   <name>springboot-autoconfig-example</name>
   <description>datasource-proxy example project: springboot auto configuration</description>
 

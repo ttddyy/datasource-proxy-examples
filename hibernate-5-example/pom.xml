@@ -5,10 +5,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>dsp-hibernate-example</artifactId>
   <version>1.0-SNAPSHOT</version>
   <groupId>net.ttddyy</groupId>
-  <name>hibernate-example</name>
+  <artifactId>dsp-hibernate-5-example</artifactId>
+  <name>hibernate-5-example</name>
   <description>datasource-proxy example project: java-based Hibernate configuration</description>
 
   <properties>

@@ -10,3 +10,9 @@ tasks:
   - init: ./mvnw install -DskipTests=false
 
 
+
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack
+
+
