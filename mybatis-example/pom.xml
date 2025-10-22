@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
         <mybatis.version>3.5.19</mybatis.version>
-        <datasource-proxy.version>1.8.1</datasource-proxy.version>
+        <datasource-proxy.version>1.11.0</datasource-proxy.version>
     </properties>
 
     <dependencies>

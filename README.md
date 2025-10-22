@@ -8,6 +8,9 @@ Requires Java 17 to compile.
 [**jndi-external-example**](jndi-external-example/README.md)
 - JNDI lookup with *external* tomcat
 
+[**mybatis-example**](mybatis-example/README.md)
+- programmatic `ProxyDataSource` creation
+
 [**spring-javaconfig-example**](spring-javaconfig-example/README.md)
 - programmatic `ProxyDataSource` creation
 

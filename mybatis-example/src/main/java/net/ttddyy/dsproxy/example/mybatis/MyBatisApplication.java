@@ -20,7 +20,8 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Application {
+public class MyBatisApplication {
+
     public static void main(String[] args) throws SQLException {
         Environment environment = getEnvironment();
         Configuration configuration = new Configuration(environment);
