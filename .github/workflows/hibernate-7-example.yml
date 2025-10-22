@@ -1,13 +1,13 @@
-name: hibernate-6-example
+name: hibernate-7-example
 
 on:
   push:
     paths:
-      - "hibernate-6-example/**"
+      - "hibernate-7-example/**"
     branches: [master]
   pull_request:
     paths:
-      - "hibernate-6-example/**"
+      - "hibernate-7-example/**"
     types:
       - opened
       - synchronize
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: "hibernate-6-example"
+        working-directory: "hibernate-7-example"
     strategy:
       matrix:
         distribution: [ 'temurin' ]

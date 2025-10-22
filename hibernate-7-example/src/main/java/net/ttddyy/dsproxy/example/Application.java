@@ -25,7 +25,7 @@ import net.ttddyy.dsproxy.listener.logging.DefaultQueryLogEntryCreator;
 import net.ttddyy.dsproxy.listener.logging.SystemOutQueryLoggingListener;
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 
-public class Hibernate7Application {
+public class Application {
 
     public static void main(String[] args) {
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {

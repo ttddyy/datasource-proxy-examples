@@ -23,5 +23,8 @@ Requires Java 17 to compile.
 [**Hibernate-6-example**](hibernate-6-example/README.md)
 - programmatic `ProxyDataSource` creation
 
+[**Hibernate-7-example**](hibernate-7-example/README.md)
+- programmatic `ProxyDataSource` creation
+
 [**springboot-autoconfig-example**](springboot-autoconfig-example/README.md)
 - programmatic `ProxyDataSource` creation
